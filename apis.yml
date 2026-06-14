@@ -1,90 +1,89 @@
 aid: duolingo
 name: Duolingo
-description: >-
-  Duolingo (NASDAQ: DUOL) is a Pittsburgh, Pennsylvania based learning
-  technology company best known for the Duolingo language-learning app, the
-  world's most-downloaded education app, offering courses in more than 40
-  languages including Spanish, English, French, German, Italian, Portuguese,
-  Japanese, and Chinese. Founded in 2011 by Luis von Ahn and Severin Hacker,
-  Duolingo has expanded its consumer learning footprint beyond languages with
-  Duolingo Math, Duolingo Music, a newly rolled-out Chess course, and Duolingo
-  ABC for early literacy, all delivered through the same gamified, streak-
-  driven mobile experience. The Company also operates the Duolingo English
-  Test, a digital English-proficiency exam accepted by thousands of higher-
-  education institutions, certification programs, and government agencies
-  worldwide as an alternative to TOEFL and IELTS. Duolingo monetizes through
-  Super Duolingo and Duolingo Max subscriptions, in-app advertising, in-app
-  purchases, and Duolingo English Test fees. The company surpassed 50 million
-  daily active users in Q3 2025 and reported 41% revenue growth in Q2 2025.
-  Duolingo does not publish an official public developer API, SDK, or
-  developer portal; integrations with the Duolingo English Test (score-send
-  to institutional CRMs such as Slate) are handled through a private API-key
-  program negotiated directly with accepting institutions. Community-
-  maintained reverse-engineered clients exist against the unofficial
-  https://www.duolingo.com/api/1 surface but are not endorsed by Duolingo.
+description: 'Duolingo (NASDAQ: DUOL) is a Pittsburgh, Pennsylvania based learning
+  technology company best known for the Duolingo language-learning app, the world''s
+  most-downloaded education app, offering courses in more than 40 languages including
+  Spanish, English, French, German, Italian, Portuguese, Japanese, and Chinese. Founded
+  in 2011 by Luis von Ahn and Severin Hacker, Duolingo has expanded its consumer learning
+  footprint beyond languages with Duolingo Math, Duolingo Music, a newly rolled-out
+  Chess course, and Duolingo ABC for early literacy, all delivered through the same
+  gamified, streak- driven mobile experience. The Company also operates the Duolingo
+  English Test, a digital English-proficiency exam accepted by thousands of higher-
+  education institutions, certification programs, and government agencies worldwide
+  as an alternative to TOEFL and IELTS. Duolingo monetizes through Super Duolingo
+  and Duolingo Max subscriptions, in-app advertising, in-app purchases, and Duolingo
+  English Test fees. The company surpassed 50 million daily active users in Q3 2025
+  and reported 41% revenue growth in Q2 2025. Duolingo does not publish an official
+  public developer API, SDK, or developer portal; integrations with the Duolingo English
+  Test (score-send to institutional CRMs such as Slate) are handled through a private
+  API-key program negotiated directly with accepting institutions. Community- maintained
+  reverse-engineered clients exist against the unofficial https://www.duolingo.com/api/1
+  surface but are not endorsed by Duolingo.'
 type: Index
 position: Provider
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Language Learning
-  - Education
-  - EdTech
-  - Mobile Learning
-  - Gamification
-  - Language Assessment
-  - English Proficiency
-  - Math Learning
-  - Music Learning
-  - Early Literacy
-  - Consumer Apps
-  - Subscription
+- Language Learning
+- Education
+- EdTech
+- Mobile Learning
+- Gamification
+- Language Assessment
+- English Proficiency
+- Math Learning
+- Music Learning
+- Early Literacy
+- Consumer Apps
+- Subscription
 url: https://raw.githubusercontent.com/api-evangelist/duolingo/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-05-25'
 specificationVersion: '0.20'
 apis: []
 common:
-  - type: Website
-    url: https://www.duolingo.com
-  - type: SuperDuolingo
-    url: https://www.duolingo.com/super
-  - type: DuolingoMax
-    url: https://www.duolingo.com/max
-  - type: DuolingoEnglishTest
-    url: https://englishtest.duolingo.com
-  - type: DuolingoEnglishTestForInstitutions
-    url: https://englishtest.duolingo.com/institutions
-  - type: DuolingoForSchools
-    url: https://schools.duolingo.com
-  - type: DuolingoABC
-    url: https://www.duolingo.com/abc
-  - type: DuolingoMath
-    url: https://www.duolingo.com/math
-  - type: DuolingoMusic
-    url: https://www.duolingo.com/music
-  - type: Company
-    url: https://www.duolingo.com/info
-  - type: Newsroom
-    url: https://blog.duolingo.com
-  - type: Research
-    url: https://research.duolingo.com
-  - type: GitHub
-    url: https://github.com/duolingo
-  - type: InvestorRelations
-    url: https://investors.duolingo.com
-  - type: SECFilings
-    url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001562088
-  - type: Careers
-    url: https://careers.duolingo.com
-  - type: Support
-    url: https://support.duolingo.com
-  - type: Twitter
-    url: https://twitter.com/duolingo
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/duolingo
-  - type: YouTube
-    url: https://www.youtube.com/@duolingo
+- type: Website
+  url: https://www.duolingo.com
+- type: SuperDuolingo
+  url: https://www.duolingo.com/super
+- type: DuolingoMax
+  url: https://www.duolingo.com/max
+- type: DuolingoEnglishTest
+  url: https://englishtest.duolingo.com
+- type: DuolingoEnglishTestForInstitutions
+  url: https://englishtest.duolingo.com/institutions
+- type: DuolingoForSchools
+  url: https://schools.duolingo.com
+- type: DuolingoABC
+  url: https://www.duolingo.com/abc
+- type: DuolingoMath
+  url: https://www.duolingo.com/math
+- type: DuolingoMusic
+  url: https://www.duolingo.com/music
+- type: Company
+  url: https://www.duolingo.com/info
+- type: Newsroom
+  url: https://blog.duolingo.com
+- type: Research
+  url: https://research.duolingo.com
+- type: GitHub
+  url: https://github.com/duolingo
+- type: InvestorRelations
+  url: https://investors.duolingo.com
+- type: SECFilings
+  url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001562088
+- type: Careers
+  url: https://careers.duolingo.com
+- type: Support
+  url: https://support.duolingo.com
+- type: Twitter
+  url: https://twitter.com/duolingo
+- type: LinkedIn
+  url: https://www.linkedin.com/company/duolingo
+- type: YouTube
+  url: https://www.youtube.com/@duolingo
+- url: graphql/duolingo-graphql.md
+  type: GraphQL
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

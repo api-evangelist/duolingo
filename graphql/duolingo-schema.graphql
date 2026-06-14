@@ -1,0 +1,775 @@
+"""
+Duolingo Conceptual GraphQL Schema
+Based on the community-documented Duolingo API surface (https://duolingo-api.readthedocs.io/)
+and reverse-engineered REST endpoints at https://www.duolingo.com/api/1.
+This schema is conceptual and not an official Duolingo product.
+"""
+
+scalar DateTime
+scalar JSON
+
+# ─── Enumerations ────────────────────────────────────────────────────────────
+
+enum LanguageCode {
+  EN
+  ES
+  FR
+  DE
+  IT
+  PT
+  JA
+  ZH
+  KO
+  AR
+  RU
+  NL
+  PL
+  SV
+  TR
+  EL
+  HI
+  HE
+  DA
+  FI
+  NO
+  CS
+  HU
+  RO
+  UK
+  VI
+  ID
+  TH
+  LA
+  GA
+  CY
+  SW
+  HT
+  TL
+  EO
+  HV
+  NAV
+  YI
+  ZU
+  NB
+  CA
+}
+
+enum ChallengeType {
+  TRANSLATE
+  REVERSE_TRANSLATE
+  LISTEN
+  SPEAK
+  SELECT
+  TAP
+  MATCH
+  FILL_BLANK
+  ARRANGE
+  DEFINITION
+  SELECT_TRANSCRIPTION
+  NAME
+  DIALOGUE
+  JUDGE
+  GAP_FILL
+  PARTIAL_REVERSE_TRANSLATE
+  FORM
+  TYPE_COMPLETE_TABLE
+  SELECT_PRONUNCIATION
+}
+
+enum SkillLevel {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETE
+  LEGENDARY
+}
+
+enum ProficiencyLevel {
+  BEGINNER
+  ELEMENTARY
+  INTERMEDIATE
+  UPPER_INTERMEDIATE
+  ADVANCED
+  MASTERED
+}
+
+enum GoalType {
+  CASUAL
+  REGULAR
+  SERIOUS
+  INTENSE
+}
+
+enum LeaderboardTimeframe {
+  WEEKLY
+  MONTHLY
+  ALL_TIME
+}
+
+enum AchievementCategory {
+  STREAK
+  XP
+  FRIENDS
+  COURSE
+  SKILL
+  LESSON
+  VOCABULARY
+  SPECIAL
+}
+
+# ─── Core User Types ─────────────────────────────────────────────────────────
+
+type User {
+  id: ID!
+  username: String!
+  name: String
+  bio: String
+  location: String
+  avatar: Avatar
+  joinedDate: DateTime
+  streak: StreakDetails
+  xp: XPDetails
+  gems: Gems
+  lingots: Lingots
+  health: Health
+  totalXP: Int
+  currentCourse: Course
+  courses: [Course!]
+  languages: [Language!]
+  friends: [Friend!]
+  achievements: [Achievement!]
+  trophies: [Trophy!]
+  certificates: [Certificate!]
+  leaderboards: [LeaderBoard!]
+  clubs: [Club!]
+  dailyGoal: DailyGoal
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UserDetails {
+  user: User!
+  stats: UserStats
+  streakInfo: StreakDetails
+  currentLanguage: Language
+  recentActivity: [FriendActivity!]
+  placement: Placement
+}
+
+type UserStats {
+  userId: ID!
+  totalXP: Int!
+  weeklyXP: Int!
+  monthlyXP: Int!
+  longestStreak: Int!
+  currentStreak: Int!
+  lessonsCompleted: Int!
+  wordsLearned: Int!
+  minutesPracticed: Int!
+  daysActive: Int!
+  level: Int!
+}
+
+type UserStreak {
+  userId: ID!
+  currentStreak: Int!
+  longestStreak: Int!
+  lastStreakDate: DateTime
+  isActive: Boolean!
+  streakExtendedToday: Boolean!
+  freezesAvailable: Int!
+}
+
+# ─── Language & Course Types ──────────────────────────────────────────────────
+
+type Language {
+  code: LanguageCode!
+  name: String!
+  nativeName: String
+  flagEmoji: String
+  learnerCount: Int
+  courses: [Course!]
+  isActive: Boolean!
+}
+
+type LanguageDetails {
+  language: Language!
+  totalLearners: Int
+  availableFromLanguages: [Language!]
+  featuredCourse: Course
+  description: String
+  difficultyRating: Float
+}
+
+type Course {
+  id: ID!
+  fromLanguage: Language!
+  learningLanguage: Language!
+  title: String!
+  description: String
+  xp: Int!
+  crowns: Int!
+  totalLessonsCompleted: Int!
+  currentLevel: Int!
+  skillTree: SkillTree
+  units: [Unit!]
+  placement: Placement
+  isActive: Boolean!
+  startedAt: DateTime
+  lastPracticedAt: DateTime
+}
+
+type CourseDetails {
+  course: Course!
+  totalSkills: Int!
+  completedSkills: Int!
+  totalLessons: Int!
+  completedLessons: Int!
+  totalXP: Int!
+  estimatedCompletionDate: DateTime
+}
+
+# ─── Skill & Tree Types ───────────────────────────────────────────────────────
+
+type Skill {
+  id: ID!
+  name: String!
+  shortName: String
+  urlName: String!
+  iconUrl: String
+  description: String
+  level: SkillLevel!
+  progress: Float!
+  strength: Float!
+  lessons: [Lesson!]
+  words: [Word!]
+  dependsOn: [Skill!]
+  unlocksSkills: [Skill!]
+  xpEarned: Int!
+  crowns: Int!
+  isAccessible: Boolean!
+  completedAt: DateTime
+}
+
+type SkillDetails {
+  skill: Skill!
+  totalWords: Int!
+  learnedWords: Int!
+  totalLessons: Int!
+  completedLessons: Int!
+  grammarNotes: String
+  culturalNotes: String
+}
+
+type SkillTree {
+  courseId: ID!
+  skills: [Skill!]!
+  totalSkills: Int!
+  completedSkills: Int!
+  currentSkill: Skill
+}
+
+# ─── Unit Types ───────────────────────────────────────────────────────────────
+
+type Unit {
+  id: ID!
+  title: String!
+  description: String
+  guidebookUrl: String
+  levels: [Level!]!
+  currentLevel: Level
+  isComplete: Boolean!
+  xpEarned: Int!
+  order: Int!
+}
+
+type UnitDetails {
+  unit: Unit!
+  totalLevels: Int!
+  completedLevels: Int!
+  skills: [Skill!]
+  totalXP: Int!
+}
+
+# ─── Level Types ──────────────────────────────────────────────────────────────
+
+type Level {
+  id: ID!
+  type: String!
+  subtype: String
+  title: String
+  description: String
+  unitId: ID!
+  lessons: [Lesson!]
+  isComplete: Boolean!
+  isLegendary: Boolean!
+  xpReward: Int!
+  order: Int!
+}
+
+type LevelDetails {
+  level: Level!
+  totalLessons: Int!
+  completedLessons: Int!
+  challengeTypes: [ChallengeType!]!
+  hearts: Int
+}
+
+# ─── Lesson Types ─────────────────────────────────────────────────────────────
+
+type Lesson {
+  id: ID!
+  skillId: ID!
+  title: String
+  type: String!
+  challenges: [Challenge!]
+  xpReward: Int!
+  heartsAllowed: Int
+  isComplete: Boolean!
+  completedAt: DateTime
+  score: Float
+}
+
+type LessonDetails {
+  lesson: Lesson!
+  totalChallenges: Int!
+  completedCorrectly: Int!
+  errors: Int!
+  timeSpent: Int
+  xpEarned: Int!
+}
+
+# ─── Challenge & Exercise Types ───────────────────────────────────────────────
+
+type Challenge {
+  id: ID!
+  type: ChallengeType!
+  prompt: String!
+  correctAnswer: String
+  possibleAnswers: [String!]
+  tokens: [JSON]
+  metadata: JSON
+  ttsUrl: String
+  newWords: [Word!]
+  xpReward: Int!
+}
+
+type Exercise {
+  id: ID!
+  lessonId: ID!
+  challengeType: ChallengeType!
+  sourceText: String
+  targetText: String
+  audio: String
+  image: String
+  hints: [String!]
+  isCorrect: Boolean
+  userAnswer: String
+  timeSpent: Int
+}
+
+# ─── Vocabulary & Word Types ──────────────────────────────────────────────────
+
+type Vocabulary {
+  userId: ID!
+  language: Language!
+  words: [Word!]!
+  totalWords: Int!
+  masteredWords: Int!
+  dueForReview: [Word!]
+  lastUpdated: DateTime
+}
+
+type Word {
+  id: ID!
+  word: String!
+  normalizedWord: String
+  pos: String
+  infinitive: String
+  language: Language!
+  translations: [WordTranslation!]
+  proficiency: WordProficiency
+  skillId: ID
+  ttsUrl: String
+  examples: [String!]
+  lastPracticed: DateTime
+  dueDate: DateTime
+}
+
+type WordDetails {
+  word: Word!
+  fullTranslations: [WordTranslation!]!
+  usageExamples: [String!]!
+  relatedWords: [Word!]
+  grammarInfo: JSON
+  imageUrl: String
+}
+
+type WordTranslation {
+  text: String!
+  language: Language!
+  partOfSpeech: String
+  context: String
+}
+
+type WordProficiency {
+  wordId: ID!
+  strength: Float!
+  level: ProficiencyLevel!
+  timesCorrect: Int!
+  timesIncorrect: Int!
+  lastSeenAt: DateTime
+  nextReviewAt: DateTime
+}
+
+# ─── Gamification Types ───────────────────────────────────────────────────────
+
+type XP {
+  amount: Int!
+  source: String
+  earnedAt: DateTime
+}
+
+type XPDetails {
+  userId: ID!
+  totalXP: Int!
+  weeklyXP: Int!
+  dailyXP: Int!
+  history: [XP!]
+  level: Int!
+  xpToNextLevel: Int!
+}
+
+type StreakDetails {
+  currentStreak: Int!
+  longestStreak: Int!
+  isStreakActive: Boolean!
+  lastStreakDate: DateTime
+  streakStartDate: DateTime
+  streakFreezes: StreakFreezes
+  extendedToday: Boolean!
+}
+
+type StreakFreezes {
+  available: Int!
+  used: Int!
+  lastUsedAt: DateTime
+}
+
+type Gems {
+  userId: ID!
+  balance: Int!
+  transactions: [JSON!]
+  lastUpdated: DateTime
+}
+
+type Lingots {
+  userId: ID!
+  balance: Int!
+  transactions: [JSON!]
+  lastUpdated: DateTime
+}
+
+type Health {
+  userId: ID!
+  hearts: Int!
+  maxHearts: Int!
+  unlimitedHealth: Boolean!
+  nextHeartRefillAt: DateTime
+  heartRefillCostGems: Int
+}
+
+# ─── Goals & Practice ─────────────────────────────────────────────────────────
+
+type DailyGoal {
+  userId: ID!
+  type: GoalType!
+  xpGoal: Int!
+  minutesGoal: Int!
+  progress: DailyGoalProgress
+}
+
+type DailyGoalProgress {
+  date: String!
+  xpEarned: Int!
+  xpGoal: Int!
+  minutesPracticed: Int!
+  minutesGoal: Int!
+  isComplete: Boolean!
+  completedAt: DateTime
+}
+
+type Practice {
+  id: ID!
+  userId: ID!
+  type: String!
+  language: Language!
+  wordsReviewed: [Word!]
+  xpEarned: Int!
+  accuracy: Float!
+  timeSpent: Int!
+  completedAt: DateTime
+}
+
+# ─── Social & Leaderboard Types ───────────────────────────────────────────────
+
+type LeaderBoard {
+  id: ID!
+  timeframe: LeaderboardTimeframe!
+  language: Language
+  entries: [LeaderBoardEntry!]!
+  userRank: Int
+  totalParticipants: Int!
+  updatedAt: DateTime
+}
+
+type LeaderBoardEntry {
+  rank: Int!
+  user: User!
+  xp: Int!
+  streak: Int
+  isCurrentUser: Boolean!
+}
+
+type Friend {
+  id: ID!
+  user: User!
+  friendedAt: DateTime
+  isFollowing: Boolean!
+  isFollower: Boolean!
+}
+
+type FriendDetails {
+  friend: Friend!
+  mutualFriends: [User!]
+  sharedLanguages: [Language!]
+  recentActivity: [FriendActivity!]
+}
+
+type FriendActivity {
+  id: ID!
+  userId: ID!
+  type: String!
+  description: String!
+  xpEarned: Int
+  language: Language
+  skill: Skill
+  createdAt: DateTime!
+}
+
+# ─── Achievement & Trophy Types ───────────────────────────────────────────────
+
+type Achievement {
+  id: ID!
+  name: String!
+  description: String!
+  category: AchievementCategory!
+  iconUrl: String
+  xpReward: Int!
+  gemsReward: Int!
+  isEarned: Boolean!
+  earnedAt: DateTime
+  progress: Float
+  requiredValue: Int
+  currentValue: Int
+}
+
+type AchievementDetails {
+  achievement: Achievement!
+  totalEarners: Int
+  rarityPercent: Float
+  tier: Int
+  nextTierRequirement: Int
+}
+
+type Trophy {
+  id: ID!
+  name: String!
+  description: String!
+  iconUrl: String!
+  earnedAt: DateTime!
+  league: String
+  placement: Int
+  season: String
+}
+
+type Certificate {
+  id: ID!
+  userId: ID!
+  type: String!
+  language: Language!
+  level: String!
+  issuedAt: DateTime!
+  expiresAt: DateTime
+  verificationUrl: String
+  score: Float
+}
+
+# ─── Placement & Club Types ───────────────────────────────────────────────────
+
+type Placement {
+  userId: ID!
+  language: Language!
+  recommendedUnit: Int
+  recommendedSkill: Skill
+  level: String
+  completedAt: DateTime
+}
+
+type Avatar {
+  userId: ID!
+  imageUrl: String!
+  hasPlus: Boolean!
+  border: String
+  backgroundUrl: String
+}
+
+type Club {
+  id: ID!
+  name: String!
+  description: String
+  language: Language!
+  memberCount: Int!
+  totalXP: Int!
+  rank: Int
+  members: [User!]
+  leaderboard: LeaderBoard
+  joinCode: String
+  isPublic: Boolean!
+  createdAt: DateTime
+}
+
+type ClubDetails {
+  club: Club!
+  topMembers: [LeaderBoardEntry!]!
+  weeklyXP: Int!
+  recentActivity: [FriendActivity!]
+}
+
+# ─── Auth & API Types ─────────────────────────────────────────────────────────
+
+type APIKey {
+  id: ID!
+  key: String!
+  description: String
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  isActive: Boolean!
+}
+
+type Token {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int
+  scope: String
+}
+
+# ─── Pagination ───────────────────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  totalCount: Int
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type WordConnection {
+  edges: [WordEdge!]!
+  pageInfo: PageInfo!
+}
+
+type WordEdge {
+  node: Word!
+  cursor: String!
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  user(id: ID!): User
+  userByUsername(username: String!): User
+  userDetails(id: ID!): UserDetails
+  userStats(id: ID!): UserStats
+  userStreak(id: ID!): UserStreak
+  currentUser: User
+
+  language(code: LanguageCode!): Language
+  languageDetails(code: LanguageCode!): LanguageDetails
+  languages(active: Boolean): [Language!]!
+
+  course(id: ID!): Course
+  courseDetails(id: ID!): CourseDetails
+
+  skill(id: ID!): Skill
+  skillDetails(id: ID!): SkillDetails
+  skillTree(courseId: ID!): SkillTree
+
+  unit(id: ID!): Unit
+  unitDetails(id: ID!): UnitDetails
+
+  level(id: ID!): Level
+  levelDetails(id: ID!): LevelDetails
+
+  lesson(id: ID!): Lesson
+  lessonDetails(id: ID!): LessonDetails
+
+  challenge(id: ID!): Challenge
+  exercise(id: ID!): Exercise
+
+  vocabulary(userId: ID!, languageCode: LanguageCode!): Vocabulary
+  word(id: ID!): Word
+  wordDetails(id: ID!): WordDetails
+  words(userId: ID!, languageCode: LanguageCode!, first: Int, after: String): WordConnection
+
+  leaderboard(timeframe: LeaderboardTimeframe!, languageCode: LanguageCode): LeaderBoard
+  friends(userId: ID!, first: Int, after: String): UserConnection
+  friendDetails(friendId: ID!): FriendDetails
+  friendActivity(userId: ID!, limit: Int): [FriendActivity!]
+
+  achievement(id: ID!): Achievement
+  achievementDetails(id: ID!): AchievementDetails
+  achievements(userId: ID!, category: AchievementCategory): [Achievement!]
+  trophies(userId: ID!): [Trophy!]
+  certificates(userId: ID!): [Certificate!]
+
+  placement(userId: ID!, languageCode: LanguageCode!): Placement
+
+  club(id: ID!): Club
+  clubDetails(id: ID!): ClubDetails
+  clubs(languageCode: LanguageCode, first: Int, after: String): [Club!]
+
+  xpDetails(userId: ID!): XPDetails
+  streakDetails(userId: ID!): StreakDetails
+  gems(userId: ID!): Gems
+  lingots(userId: ID!): Lingots
+  health(userId: ID!): Health
+  dailyGoal(userId: ID!): DailyGoal
+  dailyGoalProgress(userId: ID!, date: String): DailyGoalProgress
+}
+
+type Mutation {
+  startLesson(skillId: ID!): Lesson
+  completeLesson(lessonId: ID!, answers: [JSON!]!): LessonDetails
+  submitChallenge(challengeId: ID!, answer: String!): Exercise
+  startPractice(userId: ID!, languageCode: LanguageCode!): Practice
+  completePractice(practiceId: ID!): Practice
+  updateDailyGoal(userId: ID!, type: GoalType!): DailyGoal
+  addFriend(username: String!): Friend
+  removeFriend(friendId: ID!): Boolean
+  joinClub(joinCode: String!): Club
+  leaveClub(clubId: ID!): Boolean
+  purchaseStreakFreeze: StreakFreezes
+  purchaseHearts(quantity: Int!): Health
+  selectCourse(fromLanguage: LanguageCode!, learningLanguage: LanguageCode!): Course
+  completePlacement(responses: [JSON!]!): Placement
+}
