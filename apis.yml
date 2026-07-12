@@ -42,6 +42,10 @@ modified: '2026-05-25'
 specificationVersion: '0.20'
 apis: []
 common:
+- type: VulnerabilityDisclosure
+  url: security/duolingo-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/duolingo-domain-security.yml
 - type: Website
   url: https://www.duolingo.com
 - type: SuperDuolingo
@@ -84,6 +88,8 @@ common:
   url: https://www.youtube.com/@duolingo
 - url: graphql/duolingo-graphql.md
   type: GraphQL
+- url: https://blog.duolingo.com/rss/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
