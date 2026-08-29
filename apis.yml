@@ -20,6 +20,17 @@ description: 'Duolingo (NASDAQ: DUOL) is a Pittsburgh, Pennsylvania based learni
   reverse-engineered clients exist against the unofficial https://www.duolingo.com/api/1
   surface but are not endorsed by Duolingo.'
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
