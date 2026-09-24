@@ -121,8 +121,6 @@ common:
   url: https://www.linkedin.com/company/duolingo
 - type: YouTube
   url: https://www.youtube.com/@duolingo
-- url: graphql/duolingo-graphql.md
-  type: GraphQL
 - url: https://blog.duolingo.com/rss/
   type: Blog
 maintainers:
