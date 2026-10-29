@@ -1,4 +1,4 @@
-# duolingo
+# Duolingo
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,4 +64,88 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Duolingo — gamified language, math, music, and English-proficiency learning (NASDAQ: DUOL)
+Duolingo (NASDAQ: DUOL) is a Pittsburgh, Pennsylvania based learning technology company best known for the Duolingo language-learning app, the world's most-downloaded education app, offering courses in more than 40 languages including Spanish, English, French, German, Italian, Portuguese, Japanese, and Chinese. Founded in 2011 by Luis von Ahn and Severin Hacker, Duolingo has expanded its consumer learning footprint beyond languages with Duolingo Math, Duolingo Music, a newly rolled-out Chess course, and Duolingo ABC for early literacy, all delivered through the same gamified, streak- driven mobile experience. The Company also operates the Duolingo English Test, a digital English-proficiency exam accepted by thousands of higher- education institutions, certification programs, and government agencies worldwide as an alternative to TOEFL and IELTS. Duolingo monetizes through Super Duolingo and Duolingo Max subscriptions, in-app advertising, in-app purchases, and Duolingo English Test fees. The company surpassed 50 million daily active users in Q3 2025 and reported 41% revenue growth in Q2 2025. Duolingo does not publish an official public developer API, SDK, or developer portal; integrations with the Duolingo English Test (score-send to institutional CRMs such as Slate) are handled through a private API-key program negotiated directly with accepting institutions. Community- maintained reverse-engineered clients exist against the unofficial https://www.duolingo.com/api/1 surface but are not endorsed by Duolingo.
+
+**Areas:** Language Learning · Education · EdTech · Mobile Learning · Gamification · Language Assessment · English Proficiency · Math Learning · Music Learning · Early Literacy · Consumer App · Subscription
+
+## Duolingo on APIs.io
+
+Everything profiled for Duolingo is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/duolingo/](https://apis.io/providers/duolingo/)** — or go straight to one of the APIs or properties below.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### GraphQL (1)
+
+GraphQL schemas.
+
+- [Moved to /providers/duolingo/](https://apis.io/graphqls/duolingo/duolingo-graphql/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Duolingo Domain Security](https://apis.io/security/duolingo/duolingo-domain-security/)
+- [Duolingo Vulnerability Disclosure](https://apis.io/security/duolingo/duolingo-vulnerability-disclosure/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.duolingo.com)
+- [Support](https://support.duolingo.com)
+- [Blog](https://blog.duolingo.com/rss/)
+
+## API Evangelist rating
+
+**Kin Score 5.1** — minimal · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 49.1 |
+| Contract quality | 0.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 5.3 |
+| Developer ergonomics | 2.4 |
+| Access clarity | 0.0 |
+
+**Agent readiness 0.0** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/duolingo/](https://apis.io/providers/duolingo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Duolingo: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/duolingo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
